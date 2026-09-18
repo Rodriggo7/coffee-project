@@ -1,0 +1,226 @@
+/* =========================================
+   DASHBOARD LAYOUT
+   ========================================= */
+
+/* Variables locales para el dashboard */
+:root {
+    --dash-header-height: 64px;
+    --sidebar-width-open: 240px;
+    --sidebar-width-closed: 72px;
+    --dash-bg: #0d1a16; /* Fondo oscuro */
+    --sidebar-bg: #11221d; /* Un poco más claro */
+    --hover-bg: rgba(255, 255, 255, 0.1);
+}
+
+.dashboard-wrapper {
+    min-height: 100vh;
+    background-color: var(--dash-bg);
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- HEADER --- */
+.dash-header {
+    height: var(--dash-header-height);
+    background-color: var(--sidebar-bg);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.dash-header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 50%;
+}
+
+.menu-btn:hover {
+    background-color: var(--hover-bg);
+}
+
+.dash-logo img {
+    height: 30px;
+}
+
+.dash-header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    color: white;
+}
+
+.logout-btn {
+    background: rgba(255, 100, 100, 0.2);
+    border: 1px solid rgba(255, 100, 100, 0.5);
+    color: #ffcccc;
+    padding: 5px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* --- BODY (Sidebar + Main) --- */
+.dash-body {
+    display: flex;
+    margin-top: var(--dash-header-height); /* Para no quedar bajo el header */
+    min-height: calc(100vh - var(--dash-header-height));
+}
+
+/* --- SIDEBAR --- */
+.dash-sidebar {
+    position: fixed;
+    left: 0;
+    top: var(--dash-header-height);
+    bottom: 0;
+    background-color: var(--sidebar-bg);
+    overflow-y: auto;
+    transition: width 0.2s ease; /* La magia de la animación */
+    z-index: 90;
+    border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.dash-sidebar.open {
+    width: var(--sidebar-width-open);
+}
+
+.dash-sidebar.closed {
+    width: var(--sidebar-width-closed);
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 10px;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    padding: 10px 12px;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    white-space: nowrap; /* Evita que el texto baje de línea */
+    overflow: hidden;
+}
+
+.sidebar-link:hover {
+    background-color: var(--hover-bg);
+}
+
+.sidebar-link .icon {
+    font-size: 1.2rem;
+    min-width: 24px; /* Espacio fijo para el icono */
+    display: flex;
+    justify-content: center;
+}
+
+.sidebar-link .label {
+    margin-left: 20px;
+    opacity: 1;
+    transition: opacity 0.2s;
+}
+
+/* Ocultar texto cuando está cerrado */
+.dash-sidebar.closed .sidebar-link .label {
+    opacity: 0;
+    width: 0;
+}
+
+.dash-sidebar.closed .sidebar-link {
+    justify-content: center; /* Centrar icono */
+    padding: 10px 0;
+}
+
+.dash-sidebar.closed .sidebar-link .icon {
+    margin: 0;
+}
+
+/* --- MAIN CONTENT --- */
+.dash-content {
+    flex: 1; /* Ocupa el resto del espacio */
+    margin-left: var(--sidebar-width-open); /* Deja espacio al sidebar */
+    transition: margin-left 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Si el sidebar se cierra, el margen se reduce */
+.dash-sidebar.closed ~ .dash-content {
+    margin-left: var(--sidebar-width-closed);
+}
+
+.dash-container {
+    padding: 24px;
+    flex: 1; /* Empuja el footer hacia abajo si hay poco contenido */
+}
+
+/* Ajustes Footer dentro del Dashboard */
+.dash-footer-wrapper .footer-section {
+    padding-top: 40px;
+    background: transparent;
+}
+
+/* --- RESPONSIVE LAYOUT (Header, Footer, Dashboard) --- */
+@media (max-width: 900px) {
+    /* HEADER */
+    .mobile-toggle { display: block; }
+    .header-cta { display: none; }
+    .main-nav {
+        position: absolute;
+        top: var(--header-height);
+        left: 0;
+        width: 100%;
+        background-color: var(--bg-color);
+        padding: 40px 20px;
+        flex-direction: column;
+        align-items: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: all 0.3s ease;
+    }
+    .main-nav.open {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+    .main-nav a { font-size: 1.2rem; }
+
+    /* FOOTER */
+    .newsletter-form .input-group { flex-direction: column; width: 100%; }
+    .newsletter-form input { text-align: center; margin-bottom: 10px; }
+    .footer-content { grid-template-columns: 1fr; text-align: center; gap: 50px; }
+    .footer-col { display: flex; flex-direction: column; align-items: center; }
+    .hours-list li { width: 100%; gap: 20px; }
+    .footer-bottom { flex-direction: column; gap: 20px; }
+}
+
+@media (max-width: 768px) {
+    /* DASHBOARD LAYOUT */
+    .dash-sidebar { width: 0; overflow: hidden; }
+    .dash-sidebar.open { width: var(--sidebar-width-open); box-shadow: 5px 0 15px rgba(0,0,0,0.5); }
+    .dash-content { margin-left: 0 !important; }
+}

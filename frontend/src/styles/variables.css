@@ -1,0 +1,20 @@
+/* 1. Importamos las fuentes originales */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Roboto+Flex:wght@300;400;500;600;700&display=swap");
+
+:root {
+    /* --- COLORES (Extraídos de tu plantilla) --- */
+    --bg-color: #11221d;      /* Verde muy oscuro (fondo) */
+    --text-color: #ffffff;    /* Texto blanco */
+    --text-muted: rgba(255, 255, 255, 0.5);
+    
+    --color-primary: #468672; /* El verde del botón */
+    --color-primary-dark: #2e574a;
+    
+    /* --- FUENTES --- */
+    --font-body: "Roboto Flex", sans-serif;
+    --font-heading: "Playfair Display", serif;
+    
+    /* --- DIMENSIONES --- */
+    --container-width: 1200px;
+    --header-height: 90px;
+}

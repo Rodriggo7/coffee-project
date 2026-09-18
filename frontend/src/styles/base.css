@@ -1,0 +1,52 @@
+/* 2. Reseteo Básico */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: 0.3s;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* 3. Utilidad para centrar contenido (Container) */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* =========================================
+   RESPONSIVE MASTER (Móvil - Max 900px)
+   ========================================= */
+
+@media (max-width: 900px) {
+
+    /* --- 1. AJUSTES GENERALES --- */
+    .container {
+        padding: 0 15px;
+    }
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+}
